@@ -57,3 +57,9 @@ footer {
 .concept a {
     color: #004080;
 }
+
+.center-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
