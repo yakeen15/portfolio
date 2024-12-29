@@ -64,3 +64,29 @@ footer {
     margin-left: auto;
     margin-right: auto;
   }
+
+  .algorithm-container {
+    background-color: #f9f9f9; /* Light gray background */
+    border: 1px solid #ccc;   /* Subtle border */
+    border-radius: 8px;       /* Rounded corners */
+    padding: 20px;            /* Space inside the container */
+    margin: 20px 0;           /* Space outside the container */
+    font-family: "Courier New", Courier, monospace; /* Monospace font */
+    font-size: 16px;          /* Readable font size */
+    line-height: 1.5;         /* Spacing between lines */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .algorithm-container h3 {
+    font-size: 18px;
+    color: #333; /* Dark text color */
+    margin-bottom: 10px;
+  }
+  
+  .algorithm-container pre {
+    background-color: #eef; /* Slightly colored background for the algorithm code */
+    padding: 15px;
+    overflow-x: auto;       /* Horizontal scroll for long lines */
+    border-radius: 5px;     /* Rounded corners for code box */
+  }
+  
