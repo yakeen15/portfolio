@@ -75,6 +75,7 @@ footer {
     font-size: 16px;          /* Readable font size */
     line-height: 1.5;         /* Spacing between lines */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    justify-content: flex-start;
   }
   
   .algorithm-container h3 {
@@ -88,5 +89,6 @@ footer {
     padding: 15px;
     overflow-x: auto;       /* Horizontal scroll for long lines */
     border-radius: 5px;     /* Rounded corners for code box */
+    text-align: left;
   }
   

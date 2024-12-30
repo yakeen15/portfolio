@@ -23,13 +23,32 @@
         <p>Prime numbers are of utmost importance in a field like number theory. In cryptography, there are several encryption methods that are based upon finding large prime numbers.
              But what is a large prime number? Loosely, a large number can be said to be any number that requires <strong>more than 16 binary bits</strong> in order to be represented in 
              a computer system. For example, the number \(3660438061\) is represented as \[11011010001011011101101000101101_2\]in binary, requiring 32 bits. Is this a prime number? Our 
-             usual approach should be the trial division approach, which is detailed in the next segment.
+             usual approach should be the trial division approach, which is detailed in the next segment.</p>
         <h2>Trial division approach</h2>
         <p>The trial division method is the easiest known algorithm to check for the primality. Given a number \(n\), it basically involves checking divisibility of \(n\) for all the 
             numbers below \(\sqrt n\). If \(n\) is a composite number, there is going to exist one number \(d\leq\sqrt n\) such that \(d\) divides \(n\) (Consult back to AMTH101 or 
-            AMTH302 if you cannot recall the proof). So the algrithm has a time complexity of \(O(\sqrt n)\).  
+            AMTH302 if you cannot recall the proof). So the algrithm has a time complexity of \(O(\sqrt n)\).
+            <div class="algorithm-container">
+                <h3>Algorithm: Primality by division</h3>
+                <pre>
+                  <code>
+                    1. Take input: n
+                    2. For all d less than sqrt(n):
+                        If n%d == 0 is satisfied, we output composite and go to 4
+                    3. If all d are exhausted, we output prime
+                    4. End
+                  </code>
+                </pre>
+              </div>  
         </p>
-             
+        <p>This relatively simple algorithm comes with a problem, however, as we increase the number \(n\) we will also increase the runtime required for the primality test to finish. 
+            Below is a figure of the time required to check for the primality of this algorithm with the number of digits a number has.
+        </p>
+        <img src="../media/usual.png" alt="Time complexity of trial division" style="max-width: 75%;">
+        <p>As we can see, there is an exponential jump in the time required to find the primality of a number if we start increasing the number of digits it has. In most use cases of 
+            prime numbers, we require the machine to be able to check for and find many prime numbers in the shortest amount of time possible. However, if it takes 10 seconds to find 
+            the primality for a number, it would be a disaster when the seconds add up to hours lost in computation (and energy) cost for each operation! So the problem is this: given 
+            a large number, is it possible to find it's primality in some other method such that it doesn't require as much time?
         </p>
     </main>
     <footer>
