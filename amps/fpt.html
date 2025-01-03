@@ -81,8 +81,53 @@
                     </code>
                 </pre>
             </div>
-            When computing \(a^n\) we will use the <a href="fme.html">fast modular exponentiation algorithm</a>. The FME algorithm has a complexity of \(O(\text{log}(n))\).
+            When computing \(a^n\) we will use the <a href="fme.html">fast modular exponentiation algorithm</a>. The FME algorithm has a complexity of \(O(\text{log}(n))\). Using 
+            this algorithm, we present a graph, plotting the time taken by this algorithm against number digits over the figure provided previously.
         </p>
+        <img src="../media/usual_vs_fpt.png" alt="Time complexity of trial division" style="max-width: 75%;">
+        <p>
+            This figure shows that the FPT algorithm can run in almost constant time for large numbers, which is an absolutely mind-blowing improvement over the exponentially increasing 
+            time required by the naive trial division approach. This alone can make one think that the Fermat's primality test is all powerful, but there is a catch: it's not always 100% 
+            accurate.
+        </p>
+        
+        <h2>Accuracy of the test</h2>
+        <p>Since the test is probabilistic in nature (we are choosing only to check \(k\) amount of numbers in the algorithm), it is natural to question the accuracy of the method. 
+            It is possible to argue that there is very minimal chance for this to fail in the case of checking for primes (check this 
+            <a href="https://exploringnumbertheory.wordpress.com/tag/fermat-witness/">link</a> for more info), but for now we are going to check the primality for numbers from 2 to 
+            1000. The outcome is shown below.
+        </p>
+        <iframe src="fpt_t1.html" width="100%" height="600px" frameborder="0"></iframe>
+        <p>As it's seen here, all the numbers from \(2\) and \(1000\) are labelled correctly using this algorithm. But there is a catch. There are composite numbers called 
+            <a href="https://en.wikipedia.org/wiki/Carmichael_number">Carmichael numbers</a>, which have this unique property: for every number \(a\) that is coprime to a Carmicheal 
+            number \(n\), it follows the property \[a^{n-1}\equiv 1\text{ mod }n\]This gives the illusion of \(n\) being a prime number when Fermat's primality test is used, which means 
+            that it is possible for the algorithm to mislabel a Carmichael number as prime in some rare cases. Below are the accuracies found for three Carmichael numbers (assuming 
+            we take \(k=5\)):
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <td>Carmicheal number</td>
+                    <td>Accuracy</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>561</td>
+                    <td>94 out of 100 times</td>
+                </tr>
+                <tr>
+                    <td>1105</td>
+                    <td>84 out of 100 times</td>
+                </tr>
+                <tr>
+                    <td>10585</td>
+                    <td>75 out of 100 times</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>As it is seen here, for bigger Carmicheal numbers, the algorithm has a higher rate of inaccuracy. It's generally not a good idea to use this algorithm for primality 
+            checking, but it provides a theoretical basis for other tests such as Miller-Rabin primality test.</p>
     </main>
     <footer>
         <p>&copy; Shajiratul Yaqueen | <a href="contact.html">Contact</a></p>
