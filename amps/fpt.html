@@ -50,6 +50,39 @@
             the primality for a number, it would be a disaster when the seconds add up to hours lost in computation (and energy) cost for each operation! So the problem is this: given 
             a large number, is it possible to find it's primality in some other method such that it doesn't require as much time?
         </p>
+        <h2>Fermat's little theorem</h2>
+        <p>In the course AMTH302, we learn about Fermat's little theorem. The theorem states that, for a prime number \(p\) and a coprime \(a\), it is always true 
+            that\[a^{p-1}\equiv 1\text{ mod }p\]The converse isn't necessarily true. (Can you find what the converse is? If not, a quick review of logic from AMTH101 might help you.) 
+            Let's take any number \(n\) whose primality is not known. If all numbers (greater than one) \(a\) that are less than \(n\) follow Fermat's little theorem, then it can be 
+            surely said that the number \(n\) is prime. On the other hand, if there exists \(a\) that doesn't follow the theorem, then it can be said that the number is composite. Using 
+            this we can find a better and much faster algorithm for checking primality.</p>
+        <h2>Fermat's primality test: A probabilistic approach</h2>
+        <p>From the previous section, it is clear that for any given number \(n\), we can check if it is prime or not by choosing numbers \(a\) and seeing if these numbers satisfy 
+            Fermat's little theorem. However, if we choose to check all numbers that are lesser than \(n\), then the algorithm will actually perform <strong>worse</strong> than the 
+            trial division appraoch (can you imagine why?). So we approach this problem probabilistically. We only check with, say, 5 or 10 randomized numbers that are less than 
+            \(n\) and check if they follow Fermat's little theorem. This might prompt you to think that the algorithm may wrongly label composites as primes and vice versa. For that 
+            we discuss two cases.
+            <ol>
+                <li><p>Algorithm outputs <strong>composite</strong>: The number is surely composite, since the condition for being a composite is that we find <strong>any</strong> 
+                number \(a\) such that Fermat's little theorem is not true for it and the number \(n\).</p></li>
+                <li><p>Algorithm outputs <strong>prime</strong>: The number is <strong>probably prime</strong>, meaning that it may not be prime or may be.</p></li>
+            </ol>
+            We develop the algorithm now and see if it can actually bring satisfactory results.
+            <div class="algorithm-container">
+                <h3>Algorithm: Fermat's primality test</h3>
+                <pre>
+                    <code>
+                        1. Take input: n
+                        2. Choose a value of k, the number of values to check (usually 5 or 10)
+                        3. Choose a random integer a less than n:
+                            See if (a^(n-1))%n == 1. If not, stop the execution and print composite
+                        4. Repeat step 3 k times. If the condition is satisfied each time print prime
+                        5. End
+                    </code>
+                </pre>
+            </div>
+            When computing \(a^n\) we will use the <a href="fme.html">fast modular exponentiation algorithm</a>. The FME algorithm has a complexity of \(O(\text{log}(n))\).
+        </p>
     </main>
     <footer>
         <p>&copy; Shajiratul Yaqueen | <a href="contact.html">Contact</a></p>
