@@ -93,9 +93,118 @@
     <h3>Approximation using Laguerre Polynomials</h3>
     <p class="concept">
         It can be shown that a good approximation to the integral 
-        can be made using \[\sum_{i=1}^nw_if(x_i)\]given that we find appropriate weights \(w_i\). These weights are found as \[w_i=\dfrac{x_i}{(n+1)^2\left[L_{n+1}(x_i)\right]^2}\]
-        Here, \(L_n(x)\) is the \(n\)th order Laguerre polynomial, and \(x_i\) for all \(i=1,2,\cdots,n\) are the roots of the \(L_n(x)\).
+        can be made using \[\int_0^\infty e^{-x}sin(x)dx\approx\sum_{i=1}^nw_if(x_i)\]given that we find appropriate weights \(w_i\). These weights are found as \[w_i=\dfrac{x_i}{(n+1)^2\left[L_{n+1}(x_i)\right]^2}\]
+        Here, \(L_n(x)\) is the \(n\)th order Laguerre polynomial, and \(x_i\) for all \(i=1,2,\cdots,n\) are the roots of \(L_n(x)\). We will restrict ourselves to two and three 
+        point methods, so we will need to find the solution for \[L_2(x)=\dfrac12\left(x^2-4x+2\right)=0\] and \[L_3(x)=\dfrac16\left(-x^3+9x^2-18x+6\right)=0\] 
+        The first one could be solved using the quadratic formula, and will give the roots \[2\pm\sqrt2\] 
+        To solve the second one, we could use a numerical approach for finding the unknwons of a polynomial, such as one <a href="legendre-roots.html">used here</a> to find the roots of 
+        the tenth order Legendre polynomial. In this approach, make sure to first identify how many positive roots the polynomial has. In our case, if we replace \(x=-y\) and assume \(y>0\), 
+        we will get \[y^3+9x^2+18y+6=0\]which obviously has no solutions for \(y>0\), which shows that \(L_3(x)\) only has positive roots. (There is also the possibility of finding conjugate 
+        complex solutions, but for the moment we will ignore that). We can thus look for three solutions in the region \(x>0\), and the three roots are found to be \(0.415775, 2.29428, 6.28995\). 
+        Now we can find the weightage for each method.
     </p>
+    <h4>Two-point method</h4>
+    <table>
+        <thead>
+            <tr>
+                <td>Root, \(x_n\)</td>
+                <td>Weight, \(w_n\)</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    \(0.585786\)
+                </td>
+                <td>
+                    \(0.853553\)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    \(3.41421\)
+                </td>
+                <td>
+                    \(0.146447\)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>Three-point method</h4>
+    <table>
+        <thead>
+            <tr>
+                <td>Root, \(x_n\)</td>
+                <td>Weight, \(w_n\)</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    \(0.415775\)
+                </td>
+                <td>
+                    \(0.711093\)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    \(2.29428\)
+                </td>
+                <td>
+                    \(0.278518\)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    \(6.28995\)
+                </td>
+                <td>
+                    \(0.0103893\)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Results</h2>
+    <p>
+        At first, we evaluate the integral analytically, which by using integration by parts yields \(0.5\), which is 
+        the exact value for this integral. <br>Now we choose the Simpson's 1/3 rule. Since the integral is 
+        improper, we will choose a suitable cutoff parameter to convert the integral into a proper definite 
+        integral. We choose a cutoff parameter of \(10\), so that \[\int_0^\infty e^{-x}sin(x)dx\approx\int_0^{10} e^{-x}sin(x)dx\]
+        We choose a stepsize of \(h=0.1\) and integrate using it.<br>
+        Finally, we use the Gauss-Laguerre quadrature with two and three points to get two more approximations, and we compare the results.
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <td>Method</td>
+                <td>Result</td>
+                <td>Relative Error</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Exact</td>
+                <td>\(0.5\)</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>Simpson's 1/3</td>
+                <td>\(0.481895\)</td>
+                <td>\(3.62\)%</td>
+            </tr>
+            <tr>
+                <td>Gauss-Laguerre two point</td>
+                <td>\(0.432459\)</td>
+                <td>\(13.51\)%</td>
+            </tr>
+            <tr>
+                <td>Gauss-Laguerre three point</td>
+                <td>\(0.49603\)</td>
+                <td>\(0.79\)%</td>
+            </tr>
+        </tbody>
+    </table>
 </main>
 
 <footer>
